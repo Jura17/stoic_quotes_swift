@@ -52,7 +52,7 @@ struct QuoteFeed: View {
                         Button {
                             userData.toggleFavorite(currentQuote: viewModel.quote, currentAuthor: viewModel.author)
                         } label: {
-                            if userData.checkIfFavorite(currentQuote: viewModel.quote, currentAuthor: viewModel.author) != nil {
+                            if userData.checkIfFavorite(currentAuthor: viewModel.author, currentQuote: viewModel.quote) != nil {
                                 Image(systemName: "heart.fill")
                                     .imageScale(.large)
                                     .padding(.trailing, 25)

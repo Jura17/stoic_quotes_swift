@@ -44,7 +44,7 @@ final class UserDataStore: ObservableObject {
     }
     
     func toggleFavorite(currentQuote: String, currentAuthor: String) {
-        if let index = checkIfFavorite(currentQuote: currentQuote, currentAuthor: currentAuthor) {
+        if let index = checkIfFavorite(currentAuthor: currentAuthor, currentQuote: currentQuote) {
             quoteItems.remove(at: index)
         } else {
             let newQuote = Quote(id: UUID(), author: currentAuthor, quote: currentQuote)
@@ -53,8 +53,8 @@ final class UserDataStore: ObservableObject {
         saveFavoriteQuotes()
     }
     
-    func checkIfFavorite(currentQuote: String, currentAuthor: String) -> Int? {
-        return quoteItems.firstIndex(where: { $0.quote == currentQuote && $0.author == currentAuthor })
+    func checkIfFavorite(currentAuthor: String, currentQuote: String) -> Int? {
+        return quoteItems.firstIndex(where: { $0.author == currentAuthor && $0.quote == currentQuote })
     }
     
 //    func add(_ quote: Quote) {

@@ -1,23 +1,17 @@
-////
-////  Quote.swift
-////  StoicQuotes
-////
-////  Created by Julian Rakow on 13.10.23.
-////
 //
+//  Quote.swift
+//  StoicQuotes
+//
+//  Created by Julian Rakow on 13.10.23.
+//
+
 import Foundation
 
 
-struct AnotherQuote: Codable, Identifiable {
-    let id: String
-    let author: String
-    let content: String
-}
-
 struct Quote: Codable, Identifiable {
-    let id: UUID?
-    let author: String
-    let quote: String
+    var id: UUID?
+    var author: String
+    var quote: String
 }
 
 struct Mockdata {
@@ -46,7 +40,7 @@ struct Mockdata {
         Quote(
             id: UUID(),
             author: "Klaus",
-            quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget ullamcorper urna, et imperdiet mi.")
+            quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget ullamcorper urna, et imperdiet mi."),
     ]
     
     static let sampleQuote = Quote(

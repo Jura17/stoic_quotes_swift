@@ -10,19 +10,18 @@ import SwiftUI
 // needs to be marked @MainActor because data fetches on background (using async/await) thread but updating the UI always happens on MainThread
 @MainActor
 final class QuoteFeedViewModel: ObservableObject {
-    @Published var quote: String = ""
     @Published var author: String = ""
+    @Published var quote: String = ""
     @Published var isLoading = false
     
     func fetchQuote() {
         isLoading = true
-        Task {
-            let (data, _) = try await URLSession.shared.data(from: URL(string: "https://api.quotable.io/quotes/random")!)
-            let decodedResponse = try? JSONDecoder().decode(AnotherQuote.self, from: data)
-            
+        guard let url = URL(string: "https://stoic.tekloon.net/stoic-quote") else {
+            print("The was a problem with the URL")
+            return
         }
         Task {
-            let (data, _) = try await URLSession.shared.data(from: URL(string: "https://api.themotivate365.com/stoic-quote")!)
+            let (data, _) = try await URLSession.shared.data(from: url)
             let decodedResponse = try? JSONDecoder().decode(Quote.self, from: data)
             author = decodedResponse?.author ?? ""
             quote = decodedResponse?.quote ?? ""
