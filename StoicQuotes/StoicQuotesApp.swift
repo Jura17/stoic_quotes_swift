@@ -15,14 +15,16 @@ struct StoicQuotesApp: App {
     // Create appStorage obj favoriteQuotes and fill environment obj with the data
     // If empty create a new FavoriteQuotes()
 //    var favoriteQuotes = FavoriteQuotes()
-    @StateObject var userData = UserDataStore()
-    @StateObject private var lnManager = LocalNotificationManager()
+    @StateObject var userDataStorage = UserDataStorage()
+    @StateObject var lnManager = LocalNotificationManager()
+    @StateObject var viewModel = QuoteFeedViewModel()
     
     var body: some Scene {
         WindowGroup {
             QuoteFeed()
-                .environmentObject(userData)
+                .environmentObject(userDataStorage)
                 .environmentObject(lnManager)
+                .environmentObject(viewModel)
             //                .preferredColorScheme(.light)
         }
     }

@@ -21,11 +21,11 @@ import SwiftUI
 //    // maybe put appStorage methods here to retrieve and save favorites
 //}
 
-final class UserDataStore: ObservableObject {
+final class UserDataStorage: ObservableObject {
     
-    @Published var quoteItems: [Quote] = []
+    @Published var favoriteQuotes: [Quote] = []
     @AppStorage("favoriteQuotes") var favoriteQuotesData: Data = Data()
-//    @AppStorage("notificationEnabled") var notificationsEnabled: Bool = false
+    @AppStorage("scheduleRequested") var scheduleRequested = false
     
     init() {
         loadFavoriteQuotes()
@@ -33,36 +33,47 @@ final class UserDataStore: ObservableObject {
     
     func loadFavoriteQuotes() {
         if let decoded = try? JSONDecoder().decode([Quote].self, from: favoriteQuotesData) {
-            quoteItems = decoded
+            favoriteQuotes = decoded
         }
     }
     
     func saveFavoriteQuotes() {
-        if let data = try? JSONEncoder().encode(quoteItems) {
+        if let data = try? JSONEncoder().encode(favoriteQuotes) {
             favoriteQuotesData = data
         }
     }
     
     func toggleFavorite(currentQuote: String, currentAuthor: String) {
         if let index = checkIfFavorite(currentAuthor: currentAuthor, currentQuote: currentQuote) {
-            quoteItems.remove(at: index)
+            favoriteQuotes.remove(at: index)
         } else {
             let newQuote = Quote(id: UUID(), author: currentAuthor, quote: currentQuote)
-            quoteItems.append(newQuote)
+            favoriteQuotes.append(newQuote)
         }
         saveFavoriteQuotes()
     }
     
     func checkIfFavorite(currentAuthor: String, currentQuote: String) -> Int? {
-        return quoteItems.firstIndex(where: { $0.author == currentAuthor && $0.quote == currentQuote })
+        return favoriteQuotes.firstIndex(where: { $0.author == currentAuthor && $0.quote == currentQuote })
     }
     
 //    func add(_ quote: Quote) {
 //        quoteItems.append(quote)
 //    }
 //    
-//    func deleteItem(at offsets: IndexSet) {
-//        quoteItems.remove(atOffsets: offsets)
-//    }
+    func deleteItem(at offsets: IndexSet) {
+        favoriteQuotes.remove(atOffsets: offsets)
+        saveFavoriteQuotes()
+    }
     
+}
+
+extension Date: RawRepresentable {
+    public var rawValue: String {
+        self.timeIntervalSinceReferenceDate.description
+    }
+    
+    public init?(rawValue: String) {
+        self = Date(timeIntervalSinceReferenceDate: Double(rawValue) ?? 0.0)
+    }
 }

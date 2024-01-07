@@ -9,17 +9,17 @@ import SwiftUI
 
 struct FavoriteQuotesView: View {
     
-    @EnvironmentObject var favoriteQuotes: UserDataStore
+    @EnvironmentObject var userDataStorage: UserDataStorage
     
     var body: some View {
         Text("Favorite quotes")
             .font(.largeTitle)
         VStack {
-            if favoriteQuotes.quoteItems.isEmpty {
+            if userDataStorage.favoriteQuotes.isEmpty {
                 Text("No quotes added yet!")
             } else {
                 List {
-                    ForEach(favoriteQuotes.quoteItems) { quoteItem in
+                    ForEach(userDataStorage.favoriteQuotes) { quoteItem in
                         VStack(alignment: .leading, spacing: 10) {
                             Text(quoteItem.quote)
                                 .font(.title)
@@ -28,10 +28,10 @@ struct FavoriteQuotesView: View {
                         }
                         .padding()
                     }
-//                    .onDelete(perform: favoriteQuotes.deleteItem)
-                    .onDelete { indexSet in
-                        favoriteQuotes.quoteItems.remove(atOffsets: indexSet)
-                    }
+                    .onDelete(perform: userDataStorage.deleteItem)
+//                    .onDelete { indexSet in
+//                        favoriteQuotes.favoriteQuotes.remove(atOffsets: indexSet)
+//                    }
                 }
             }
         }

@@ -10,8 +10,9 @@ import UserNotifications
 
 struct QuoteFeed: View {
     
-    @StateObject var viewModel = QuoteFeedViewModel()
-    @EnvironmentObject var userData: UserDataStore
+    @EnvironmentObject var userDataStorage: UserDataStorage
+    @EnvironmentObject var lnManager: LocalNotificationManager
+    @EnvironmentObject var viewModel: QuoteFeedViewModel
     
     var body: some View {
         ZStack {
@@ -50,9 +51,9 @@ struct QuoteFeed: View {
                     Spacer()
                     HStack {
                         Button {
-                            userData.toggleFavorite(currentQuote: viewModel.quote, currentAuthor: viewModel.author)
+                            userDataStorage.toggleFavorite(currentQuote: viewModel.quote, currentAuthor: viewModel.author)
                         } label: {
-                            if userData.checkIfFavorite(currentAuthor: viewModel.author, currentQuote: viewModel.quote) != nil {
+                            if userDataStorage.checkIfFavorite(currentAuthor: viewModel.author, currentQuote: viewModel.quote) != nil {
                                 Image(systemName: "heart.fill")
                                     .imageScale(.large)
                                     .padding(.trailing, 25)
@@ -79,7 +80,7 @@ struct QuoteFeed: View {
             }
             .onAppear {
                 viewModel.fetchQuote()
-                // here if the user tapped on a notification the quote that was fetched when tapping should override the quote that is stored as current quote
+                // here if the user tapped on a notification the quote that was fetched when tapping should override the quote that is stored as current quote using the payload that should (?) come with a notification
             }
 //            .onChange(of: userData.notificationsEnabled) { _ in
 //                viewModel.addNotifications()
