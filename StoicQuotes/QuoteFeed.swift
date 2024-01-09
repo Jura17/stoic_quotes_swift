@@ -39,13 +39,14 @@ struct QuoteFeed: View {
                         if viewModel.isLoading {
                             LoadingView()
                         } else {
-                            Text(viewModel.quote)
-                                .font(.title)
-                                .multilineTextAlignment(.center)
-                                .padding(20)
-                            Text(viewModel.author)
-                                .font(.subheadline)
-                                .multilineTextAlignment(.center)                            
+                            SwipeToFetchView(viewModel: viewModel)
+//                            Text(viewModel.quote)
+//                                .font(.title)
+//                                .multilineTextAlignment(.center)
+//                                .padding(20)
+//                            Text(viewModel.author)
+//                                .font(.subheadline)
+//                                .multilineTextAlignment(.center)                            
                         }
                     }
                     Spacer()
@@ -100,3 +101,4 @@ struct QuoteFeed: View {
 //    }
     
 }
+
