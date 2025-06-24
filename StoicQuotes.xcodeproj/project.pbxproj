@@ -20,6 +20,7 @@
 		6E50E9332AD95CC90099CFB6 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50E9322AD95CC90099CFB6 /* Quote.swift */; };
 		6E50E9352AD971730099CFB6 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50E9342AD971730099CFB6 /* NetworkError.swift */; };
 		6E52AE862ADAE338009ECC32 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E52AE852ADAE338009ECC32 /* Alert.swift */; };
+		6E74FF202E0AC9E000146237 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6E74FF1F2E0AC9D500146237 /* README.md */; };
 		6E8C01942AE6E357003DCFD9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C01932AE6E357003DCFD9 /* LoadingView.swift */; };
 		6EC9DE362ADEF2C20087A557 /* FavoriteQuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC9DE352ADEF2C20087A557 /* FavoriteQuotesView.swift */; };
 		6EC9DE382ADEFA8D0087A557 /* UserDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC9DE372ADEFA8D0087A557 /* UserDataStorage.swift */; };
@@ -62,6 +63,7 @@
 		6E50E9322AD95CC90099CFB6 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		6E50E9342AD971730099CFB6 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		6E52AE852ADAE338009ECC32 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		6E74FF1F2E0AC9D500146237 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6E8C01932AE6E357003DCFD9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6EA6398F2B599BBD00F59196 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6EC9DE352ADEF2C20087A557 /* FavoriteQuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteQuotesView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				6EA6398F2B599BBD00F59196 /* Info.plist */,
 				6E1F97402AD71E260045E479 /* StoicQuotesApp.swift */,
+				6E74FF1F2E0AC9D500146237 /* README.md */,
 				6EF4589E2B3F22FB00BA10B6 /* LocalNotificationManager.swift */,
 				6E50E9322AD95CC90099CFB6 /* Quote.swift */,
 				6E50E9342AD971730099CFB6 /* NetworkError.swift */,
@@ -269,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E74FF202E0AC9E000146237 /* README.md in Resources */,
 				6E1F97482AD71E2A0045E479 /* Preview Assets.xcassets in Resources */,
 				6E1F97452AD71E2A0045E479 /* Assets.xcassets in Resources */,
 			);
