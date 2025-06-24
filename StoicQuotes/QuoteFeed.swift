@@ -13,6 +13,7 @@ struct QuoteFeed: View {
     @EnvironmentObject var userDataStorage: UserDataStorage
     @EnvironmentObject var lnManager: LocalNotificationManager
     @EnvironmentObject var viewModel: QuoteFeedViewModel
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     var body: some View {
         ZStack {
@@ -20,18 +21,26 @@ struct QuoteFeed: View {
                 VStack {
                     HStack(spacing: 20) {
                         Button {
-                            print("changing theme")
+                            userDataStorage.isDarkMode.toggle()
                         } label: {
-                            Image(systemName: "moon.fill")
-                                .imageScale(.large)
-                                .tint(.white)
+                            if userDataStorage.isDarkMode {
+                                Image(systemName: "moon.fill")
+                                    .imageScale(.large)
+                            } else {
+                                Image(systemName: "moon")
+                                    .imageScale(.large)
+                            }
                         }
                         Text("Stoic Thoughts")
                             .font(.largeTitle)
                         NavigationLink(destination: SettingsView(quoteFeedVM: viewModel), label: {
-                            Image(systemName: "gearshape.fill")
-                                .imageScale(.large)
-                                .tint(.white)
+                            if userDataStorage.isDarkMode {
+                                Image(systemName: "gearshape.fill")
+                                    .imageScale(.large)
+                            } else {
+                                Image(systemName: "gearshape")
+                                    .imageScale(.large)
+                            }
                         })
                     }
                     Spacer()
@@ -40,13 +49,6 @@ struct QuoteFeed: View {
                             LoadingView()
                         } else {
                             SwipeToFetchView(viewModel: viewModel)
-//                            Text(viewModel.quote)
-//                                .font(.title)
-//                                .multilineTextAlignment(.center)
-//                                .padding(20)
-//                            Text(viewModel.author)
-//                                .font(.subheadline)
-//                                .multilineTextAlignment(.center)                            
                         }
                     }
                     Spacer()
@@ -80,6 +82,14 @@ struct QuoteFeed: View {
                 .padding(30)
             }
             .onAppear {
+                if userDataStorage.firstLaunch {
+                    if colorScheme == .dark {
+                        userDataStorage.isDarkMode = true
+                    } else {
+                        userDataStorage.isDarkMode = false
+                    }
+                    userDataStorage.firstLaunch = false
+                }
                 viewModel.fetchQuote()
                 // here if the user tapped on a notification the quote that was fetched when tapping should override the quote that is stored as current quote using the payload that should (?) come with a notification
             }
@@ -88,6 +98,7 @@ struct QuoteFeed: View {
 //            }
 //            .onReceive(NotificationCenter.default.publisher(for: ), perform: <#T##(Publisher.Output) -> Void#>)
         }
+        .preferredColorScheme(userDataStorage.isDarkMode ? .dark : .light)
     }
  
 //    func addOrRemoveFavorite() {

@@ -26,6 +26,8 @@ final class UserDataStorage: ObservableObject {
     @Published var favoriteQuotes: [Quote] = []
     @AppStorage("favoriteQuotes") var favoriteQuotesData: Data = Data()
     @AppStorage("scheduleRequested") var scheduleRequested = false
+    @AppStorage("isDarkMode") var isDarkMode = false
+    @AppStorage("firstLaunch") var firstLaunch = true
     
     init() {
         loadFavoriteQuotes()
@@ -68,6 +70,7 @@ final class UserDataStorage: ObservableObject {
     
 }
 
+// makes it possible to save a value of type date to appStorage
 extension Date: RawRepresentable {
     public var rawValue: String {
         self.timeIntervalSinceReferenceDate.description

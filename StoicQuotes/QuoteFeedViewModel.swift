@@ -23,6 +23,7 @@ final class QuoteFeedViewModel: ObservableObject {
         Task {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decodedResponse = try? JSONDecoder().decode(Quote.self, from: data)
+            print(decodedResponse);
             author = decodedResponse?.author ?? ""
             quote = decodedResponse?.quote ?? ""
             isLoading = false

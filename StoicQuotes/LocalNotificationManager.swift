@@ -37,6 +37,7 @@ class LocalNotificationManager: ObservableObject {
     }
     
     func getPendingRequests() async -> [UNNotificationRequest] {
+        print("pending requests:")
         return await notificationCenter.pendingNotificationRequests()
     }
     

@@ -51,13 +51,23 @@ struct SettingsView: View {
                             if lnManager.isGranted {
                                 GroupBox {
                                     DatePicker("Daily Notifications", selection: $lnManager.scheduledTime, displayedComponents: .hourAndMinute)
+                                        .onChange(of: lnManager.scheduledTime) {
+                                            if userDataStorage.scheduleRequested {
+                                                lnManager.scheduleNotification(author: viewModel.author, quote: viewModel.quote)
+                                                print("requested")
+                                            } else {
+                                                print("time changed but no request")
+                                            }
+                                        }
                                     
                                     Toggle("Schedule daily Notifications", isOn: $userDataStorage.scheduleRequested)
                                         .padding()
                                         .onChange(of: userDataStorage.scheduleRequested) {
                                             if userDataStorage.scheduleRequested {
                                                 lnManager.scheduleNotification(author: viewModel.author, quote: viewModel.quote)
+                                                print("requested")
                                             } else {
+                                                print("cancelled")
                                                 UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                                             }
                                         }
@@ -75,9 +85,13 @@ struct SettingsView: View {
                     .onChange(of: scenePhase) {
                         if scenePhase == .active {
                             Task {
+                                await print(lnManager.getPendingRequests())
                                 await lnManager.getCurrentSettings()
                             }
                         }
+                    }
+                    .onAppear {
+                        print("schedule requested: \(userDataStorage.scheduleRequested)")
                     }
                 }
                 Spacer()

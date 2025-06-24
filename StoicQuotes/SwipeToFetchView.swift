@@ -13,7 +13,7 @@ struct SwipeToFetchView: View {
     @State private var isDragging = false
     
     var drag: some Gesture {
-        DragGesture()
+        DragGesture(minimumDistance: 75, coordinateSpace: .global)
             .onChanged { _ in self.isDragging = true
                 viewModel.fetchQuote()
             }
